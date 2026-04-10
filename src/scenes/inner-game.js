@@ -3,23 +3,37 @@ class InnerGame extends Phaser.Scene {
 		super("inner-game_scene");
 	}
 	preload() {
-    this.load.image('inventory', 'assets/images/inventory.png');
-    this.load.image('pausemenu', 'assets/images/Play-Options-Exit.png)');
-    this.load.image('levelborder', 'assets/images/Level Border.png');
-    this.load.spritesheet('rogueplayer', 'assets/images/doc.png', { frameWidth: 16, frameHeight: 16 });
-    
+		this.load.path = 'assets/sounds/'
+		this.load.audio('textbox_hover', 'textbox_hover.mp3')
+		this.load.audio('textbox_click', 'textbox_click.mp3')
+
+		this.load.path = 'assets/images/'
+		this.load.image('inventory', 'inventory.png');
+		this.load.image('pausemenu', 'Play-Options-Exit.png)');
+		this.load.image('levelborder', 'Level Border.png');
+		this.load.image('tv', 'outergametv.png');
+		this.load.spritesheet('rogueplayer', 'doc.png', { frameWidth: 16, frameHeight: 16 });
+
 	}
-	make_textbox(x, y, text) {
+
+	makeTextbox(x, y, text, func) {
 		let button = this.add.text(x, y, text, this.scoreConfig)
 			.setStyle({ backgroundColor: '#111' })
 			.setInteractive({ useHandCursor: true })
-			.on('pointerdown', this.fart)
-			.on('pointerover', () => button.setStyle({ backgroundColor: '#f39c12' }))
+			.on('pointerdown', () => {
+				func(button);
+				this.sound.play('textbox_click', this.buttonAudioConfig);
+			})
+			.on('pointerover', () => {
+				button.setStyle({ backgroundColor: '#f39c12' });
+				this.sound.play('textbox_hover', this.buttonAudioConfig);
+			})
 			.on('pointerout', () => button.setStyle({ backgroundColor: '#111' }));
 	}
 
-	fart() {
-
+	// test use case for function passed into makeTextbox
+	fart(button) {
+		button.setStyle({ backgroundColor: '#FFF' })
 	}
 
 	create() {
@@ -27,8 +41,8 @@ class InnerGame extends Phaser.Scene {
 		KEY_DOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 		KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
-		this.curr_map = "map1"
-		this.curr_room = "r1"
+		this.currMap = "map1"
+		this.currRoom = "r1"
 
 		this.scoreConfig = {
 			fontFamily: 'Arial',
@@ -41,9 +55,16 @@ class InnerGame extends Phaser.Scene {
 			},
 		}
 
-		this.make_textbox(100,100,"hello i am under the water please help me")
-		this.make_textbox(100,125,"aaaaaaaaaaaaaaa")
-		this.make_textbox(100,150,"pee pee poo poo")
+		this.buttonAudioConfig = {
+			volume: 1,
+			loop: false
+		}
+
+		this.add.sprite(0,0, 'tv')
+
+		this.makeTextbox(100,100,"hello i am under the water please help me", this.fart)
+		this.makeTextbox(100,125,"aaaaaaaaaaaaaaa", this.fart)
+		this.makeTextbox(100,150,"pee pee poo poo", this.fart)
 	}
 }
 
