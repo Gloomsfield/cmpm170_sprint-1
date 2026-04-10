@@ -74,7 +74,8 @@ class GameWindow extends Phaser.Scene {
 
 		this.add.sprite(0,0, 'tv_image')
 
-		this.cameras.main.setSize(300, 200);
+		this.cameras.main.setSize(300.0, 200.0);
+		this.cameras.main.setPosition(25.0, 25.0);
 
 		this.roomText = this.add.text(25,25,`ROOM: ${this.currRoom}`)
 
