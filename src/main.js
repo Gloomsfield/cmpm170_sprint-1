@@ -14,7 +14,10 @@ let config = {
 	width: 640,
 	height: 480,
 
-	scene: [ Dispatch, Load, InnerGame, OuterGame, ],
+	scene: [ /*Dispatch, Load, */ InnerGame, OuterGame, ],
+	physics: {
+    	default: 'arcade'
+  	}
 };
 
 let game = new Phaser.Game(config);
