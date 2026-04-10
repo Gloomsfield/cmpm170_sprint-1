@@ -68,9 +68,9 @@ class GameWindow extends Phaser.Scene {
 
 		this.roomText = this.add.text(25,25,`ROOM: ${this.currRoom}`)
 
-		this.makeTextbox(100,100,"move to next room", this.moveToNextRoom)
-		this.makeTextbox(100,125,"fight enemy", this.moveToNextRoom)
-		this.makeTextbox(100,150,"run to previous room", this.moveToNextRoom)
+		this.makeTextbox(100,100,"move to next room", this.moveToNextRoom.bind(this))
+		this.makeTextbox(100,125,"fight enemy", this.moveToNextRoom.bind(this))
+		this.makeTextbox(100,150,"run to previous room", this.moveToNextRoom.bind(this))
 	}
 }
 
