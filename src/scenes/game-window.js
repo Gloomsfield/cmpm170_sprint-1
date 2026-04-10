@@ -2,19 +2,6 @@ class GameWindow extends Phaser.Scene {
 	constructor() {
 		super("game-window_scene");
 	}
-	preload() {
-		this.load.path = 'assets/sounds/'
-		this.load.audio('textbox_hover', 'textbox_hover.mp3')
-		this.load.audio('textbox_click', 'textbox_click.mp3')
-
-		this.load.path = './assets/images/'
-		this.load.image('inventory', 'inventory.png');
-		this.load.image('pausemenu', 'Play-Options-Exit.png');
-		this.load.image('levelborder', 'LevelBorder.png');
-		this.load.image('tv', 'outergametv.png');
-		this.load.spritesheet('rogueplayer', 'doc.png', { frameWidth: 16, frameHeight: 16 });
-
-	}
 
 	makeTextbox(x, y, text, func) {
 		let button = this.add.text(x, y, text, this.scoreConfig)
