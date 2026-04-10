@@ -1,4 +1,4 @@
-class InnerGame extends Phaser.Scene {
+class GameWindow extends Phaser.Scene {
 	constructor() {
 		super("game-window_scene");
 	}
@@ -65,6 +65,8 @@ class InnerGame extends Phaser.Scene {
 		this.makeTextbox(100,100,"hello i am under the water please help me", this.fart)
 		this.makeTextbox(100,125,"aaaaaaaaaaaaaaa", this.fart)
 		this.makeTextbox(100,150,"pee pee poo poo", this.fart)
+
+		this.cameras.main.setSize(300, 200);
 	}
 }
 
