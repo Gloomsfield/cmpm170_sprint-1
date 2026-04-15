@@ -14,7 +14,7 @@ let config = {
 	width: 640,
 	height: 480,
 
-	scene: [ Load, Desktop, BankWindow, EmailWindow, GameWindow, ],
+	scene: [ Load, Desktop, BankWindow, EmailWindow, GameWindow, UiOverlay, ],
 };
 
 let game = new Phaser.Game(config);

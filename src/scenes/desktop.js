@@ -9,10 +9,12 @@ class Desktop extends Phaser.Scene {
 		this.scene.launch("email-window_scene");
 		this.scene.launch("game-window_scene");
 		this.scene.launch("bank-window_scene", this.currency_interface.account_balance);
+		this.scene.launch("ui-overlay_scene");
 
 		this.email_scene = this.scene.get("email-window_scene");
 		this.game_scene = this.scene.get("game-window_scene");
 		this.bank_scene = this.scene.get("bank-window_scene");
+		this.ui_scene = this.scene.get("ui-overlay_scene");
 
 		this.scene.get("email-window_scene").events.on("sort-correct", () => {
 			// TODO - factor amount into config

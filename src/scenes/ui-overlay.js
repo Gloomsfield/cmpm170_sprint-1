@@ -76,7 +76,7 @@ class UiOverlay extends Phaser.Scene {
 	}
 
 	buildHud() {
-		if (this.hasTexture("ui-health-bar") && this.hasTexture("ui-health-decoration")) {
+		if (this.hasTexture("ui-health-bar_image") && this.hasTexture("ui-health-decoration_image")) {
 			this.buildHealthBar(30, 24);
 		}
 
@@ -110,26 +110,26 @@ class UiOverlay extends Phaser.Scene {
 	}
 
 	buildHealthBar(x, y) {
-		if (!this.hasTexture("ui-heart-full")) {
+		if (!this.hasTexture("ui-heart-full_spritesheet")) {
 			return;
 		}
 
 		if (!this.anims.exists("ui-heart-pulse")) {
 			this.anims.create({
 				key: "ui-heart-pulse",
-				frames: this.anims.generateFrameNumbers("ui-heart-full", { start: 0, end: 4 }),
+				frames: this.anims.generateFrameNumbers("ui-heart-full_spritesheet", { start: 0, end: 4 }),
 				frameRate: 8,
 				repeat: -1,
 				yoyo: true,
 			});
 		}
 
-		this.healthBar = this.add.image(x, y, "ui-health-bar")
+		this.healthBar = this.add.image(x, y, "ui-health-bar_image")
 			.setOrigin(0, 0)
 			.setScrollFactor(0);
 		this.uiElements.push(this.healthBar);
 
-		this.healthBarDecoration = this.add.image(x, y, "ui-health-decoration")
+		this.healthBarDecoration = this.add.image(x, y, "ui-health-decoration_image")
 			.setOrigin(0, 0)
 			.setScrollFactor(0);
 		this.uiElements.push(this.healthBarDecoration);
@@ -141,7 +141,7 @@ class UiOverlay extends Phaser.Scene {
 
 		for (let i = 0; i < this.maxHealth; i += 1) {
 			const slotX = heartStartX + i * 10;
-			const emptyHeart = this.add.image(slotX, heartY, "ui-heart-empty")
+			const emptyHeart = this.add.image(slotX, heartY, "ui-heart-empty_image")
 				.setOrigin(0, 0)
 				.setScrollFactor(0);
 			this.uiElements.push(emptyHeart);
@@ -152,7 +152,7 @@ class UiOverlay extends Phaser.Scene {
 				.play("ui-heart-pulse");
 			this.uiElements.push(fullHeart);
 
-			const borderHeart = this.add.image(slotX, heartY, "ui-heart-border")
+			const borderHeart = this.add.image(slotX, heartY, "ui-heart-border_image")
 				.setOrigin(0, 0)
 				.setScrollFactor(0);
 			this.uiElements.push(borderHeart);
@@ -168,11 +168,11 @@ class UiOverlay extends Phaser.Scene {
 	}
 
 	buildInventory() {
-		if (!this.hasTexture("ui-inventory")) {
+		if (!this.hasTexture("ui-inventory_image")) {
 			return;
 		}
 
-		this.inventory = this.add.image(553, 360, "ui-inventory")
+		this.inventory = this.add.image(553, 360, "ui-inventory_image")
 			.setDisplaySize(160, 160)
 			.setScrollFactor(0);
 		this.uiElements.push(this.inventory);
@@ -217,11 +217,11 @@ class UiOverlay extends Phaser.Scene {
 	}
 
 	buildPauseMenu() {
-		if (!this.hasTexture("ui-pause-menu")) {
+		if (!this.hasTexture("ui-pause-menu_image")) {
 			return;
 		}
 
-		this.pauseMenu = this.add.image(320, 240, "ui-pause-menu")
+		this.pauseMenu = this.add.image(320, 240, "ui-pause-menu_image")
 			.setDisplaySize(182, 242)
 			.setScrollFactor(0)
 			.setDepth(20);
