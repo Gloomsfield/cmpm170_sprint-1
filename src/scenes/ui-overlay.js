@@ -16,36 +16,6 @@ class UiOverlay extends Phaser.Scene {
 		};
 	}
 
-	preload() {
-		if (!this.textures.exists("ui-level-border")) {
-			this.load.image("ui-level-border", "assets/images/Level Border.png");
-		}
-		if (!this.textures.exists("ui-pause-menu")) {
-			this.load.image("ui-pause-menu", "assets/images/Play-Options-Exit.png");
-		}
-		if (!this.textures.exists("ui-inventory")) {
-			this.load.image("ui-inventory", "assets/images/inventory.png");
-		}
-		if (!this.textures.exists("ui-health-bar")) {
-			this.load.image("ui-health-bar", "assets/Hearts/PNG/health_bar/health_bar.png");
-		}
-		if (!this.textures.exists("ui-health-decoration")) {
-			this.load.image("ui-health-decoration", "assets/Hearts/PNG/health_bar/health_bar_decoration.png");
-		}
-		if (!this.textures.exists("ui-heart-empty")) {
-			this.load.image("ui-heart-empty", "assets/Hearts/PNG/basic/background.png");
-		}
-		if (!this.textures.exists("ui-heart-border")) {
-			this.load.image("ui-heart-border", "assets/Hearts/PNG/basic/border.png");
-		}
-		if (!this.textures.exists("ui-heart-full")) {
-			this.load.spritesheet("ui-heart-full", "assets/Hearts/PNG/animated/border/heart_animated_1.png", {
-				frameWidth: 17,
-				frameHeight: 17,
-			});
-		}
-	}
-
 	create() {
 		if (!this.lifecycleBound) {
 			this.events.on("shutdown", this.handleShutdown, this);
