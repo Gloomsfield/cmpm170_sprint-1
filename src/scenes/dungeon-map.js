@@ -35,6 +35,8 @@ class DungeonMap extends Phaser.Scene {
         this.wallLayer.setCollisionByProperty({ collides: true });
 
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        console.log("currMap key:", this.currMap);
+        console.log("all object layers:", this.map.objects.map(layer => layer.name));
     }
 
 	createPlayer() {
@@ -105,38 +107,45 @@ class DungeonMap extends Phaser.Scene {
 	}
 
 	createTriggers() {
-		this.triggerZones = this.physics.add.staticGroup();
+        this.triggerZones = this.physics.add.staticGroup();
 
-		const layer = this.map.getObjectLayer("Triggers");
-		if (!layer) {
-			console.warn("No object layer named 'Triggers' found.");
-			return;
-		}
+        const layer = this.map.getObjectLayer("Triggers");
+        console.log("Triggers layer:", layer);
 
-		layer.objects.forEach((obj) => {
-			const zone = this.add.zone(
-				obj.x + obj.width / 2,
-				obj.y + obj.height / 2,
-				obj.width,
-				obj.height
-			);
+        if (!layer) {
+            console.warn("No object layer named 'Triggers' found.");
+            return;
+        }
 
-			this.physics.add.existing(zone, true);
+        layer.objects.forEach((obj) => {
+            const props = this.propertiesArrayToObject(obj.properties || []);
 
-			zone.triggerData = this.propertiesArrayToObject(obj.properties || []);
-			zone.triggerType = obj.type || "room";
+            const zone = this.add.zone(
+                obj.x + obj.width / 2,
+                obj.y + obj.height / 2,
+                obj.width,
+                obj.height
+            );
 
-			this.triggerZones.add(zone);
-		});
+            this.physics.add.existing(zone, true);
 
-		this.physics.add.overlap(
-			this.player,
-			this.triggerZones,
-			this.handleTrigger,
-			null,
-			this
-		);
-	}
+            zone.name = obj.name || props.name || "";
+            zone.triggerData = props;
+            zone.triggerType = obj.type || props.type || "room";
+
+            console.log("Trigger created:", zone.name, zone.triggerType, zone.triggerData);
+
+            this.triggerZones.add(zone);
+        });
+
+        this.physics.add.overlap(
+            this.player,
+            this.triggerZones,
+            this.handleTrigger,
+            null,
+            this
+        );
+    }
 
 	findSpawnPoint(spawnName) {
 		const layer = this.map.getObjectLayer("Spawns");
@@ -166,37 +175,48 @@ class DungeonMap extends Phaser.Scene {
 	}
 
 	handleTrigger(player, zone) {
-		if (this.triggerLocked) return;
-		this.triggerLocked = true;
+        console.log("hit trigger:", zone.name, zone.triggerType, zone.triggerData);
 
-		this.time.delayedCall(250, () => {
-			this.triggerLocked = false;
-		});
+        if (this.triggerLocked) return;
+        this.triggerLocked = true;
 
-		const data = zone.triggerData || {};
+        this.time.delayedCall(250, () => {
+            this.triggerLocked = false;
+        });
 
-		if (zone.triggerType === "room") {
-			this.scene.start("game-window_scene", {
-				mapKey: this.currMap,
-				roomId: data.roomId,
-				returnSpawn: data.returnSpawn || this.spawnName
-			});
-		}
-		else if (zone.triggerType === "enemy") {
-			this.scene.start("game-window_scene", {
-				mapKey: this.currMap,
-				roomId: data.roomId,
-				enemyId: data.enemyId,
-				returnSpawn: data.returnSpawn || this.spawnName
-			});
-		}
-		else if (zone.triggerType === "exit") {
-			this.scene.start("dungeon-map_scene", {
-				mapKey: data.targetMap,
-				spawnName: data.targetSpawn
-			});
-		}
-	}
+        const data = zone.triggerData || {};
+
+        if (zone.triggerType === "room") {
+            this.scene.start("game-window_scene", {
+                mapKey: this.currMap,
+                roomId: data.roomId,
+                returnSpawn: data.returnSpawn || this.spawnName
+            });
+        }
+        else if (zone.triggerType === "enemy") {
+            this.scene.start("game-window_scene", {
+                mapKey: this.currMap,
+                roomId: data.roomId,
+                enemyId: data.enemyId,
+                returnSpawn: data.returnSpawn || this.spawnName
+            });
+        }
+        else if (zone.triggerType === "exit") {
+            this.scene.start("dungeon-map_scene", {
+                mapKey: data.targetMap,
+                spawnName: data.targetSpawn
+            });
+        }
+        else if (zone.triggerType === "microtrans") {
+            this.scene.start("game-window_scene", {
+                mapKey: this.currMap,
+                returnSpawn: data.returnSpawn || this.spawnName,
+                fromMap: true,
+                triggerName: zone.name,
+                triggerType: zone.triggerType
+            });
+        }
+    }
 
 	update() {
 		const speed = 80;
