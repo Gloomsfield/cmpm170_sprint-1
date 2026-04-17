@@ -43,8 +43,15 @@ class GameWindow extends Phaser.Scene {
 	// test use case for function passed into makeTextbox
 	goToMap(button) {
 		button.setStyle({ backgroundColor: '#FFF' })
+
+		this.scene.start("dungeon-map_scene", {
+		mapKey: this.currMap,
+		spawnName: "spawn_start"
+		});
+		/*
 		this.currRoom = 'r2'
 		this.roomText.setText(`ROOM: ${this.currRoom}`)
+		*/
 	}
 
 	create() {
