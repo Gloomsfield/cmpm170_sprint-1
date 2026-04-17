@@ -4,7 +4,7 @@ class CurrencyInterface extends Phaser.GameObjects.GameObject {
 
 		scene.add.existing(this);
 
-		this.account_balance = 100.0;
+		this.account_balance = 10.0;
 	}
 
 	// returns the new balance
