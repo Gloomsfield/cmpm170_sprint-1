@@ -11,8 +11,8 @@
 let config = {
 	type: Phaser.WEBGL,
 
-	width: 640,
-	height: 480,
+	width: 1000,
+	height: 600,
 
 	scene: [ Load, Desktop, BankWindow, EmailWindow, GameWindow, ],
 };
