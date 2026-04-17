@@ -22,8 +22,8 @@ class DungeonMap extends Phaser.Scene {
 	createMap() {
 		this.map = this.make.tilemap({ key: this.currMap });
 
-        this.cameras.main.setSize(300, 200);
-        this.cameras.main.setPosition(25, 25);
+        this.cameras.main.setSize(620.0, 560.0);
+        this.cameras.main.setPosition(20.0, 20.0);
 
         this.add.sprite(0, 0, 'tv_image').setOrigin(0, 0);
 
