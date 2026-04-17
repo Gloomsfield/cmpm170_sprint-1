@@ -69,7 +69,7 @@
          "name":"Enemy",
          "objects":[
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":2,
                  "name":"",
@@ -81,7 +81,7 @@
                  "y":460.727
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":3,
                  "name":"",
@@ -93,7 +93,7 @@
                  "y":460.727
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":4,
                  "name":"",
@@ -105,7 +105,7 @@
                  "y":459.818
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":5,
                  "name":"",
@@ -117,7 +117,7 @@
                  "y":385.273
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":6,
                  "name":"",
@@ -129,7 +129,7 @@
                  "y":621.636
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":7,
                  "name":"",
@@ -141,7 +141,7 @@
                  "y":698
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":8,
                  "name":"",
@@ -153,7 +153,7 @@
                  "y":598.909
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":9,
                  "name":"",
@@ -165,7 +165,7 @@
                  "y":445.273
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":10,
                  "name":"",
@@ -177,7 +177,7 @@
                  "y":312.545
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":11,
                  "name":"",
@@ -189,7 +189,7 @@
                  "y":306.182
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":12,
                  "name":"",
@@ -201,7 +201,7 @@
                  "y":163.455
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":13,
                  "name":"",
@@ -213,7 +213,7 @@
                  "y":188.909
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":14,
                  "name":"",
@@ -225,7 +225,7 @@
                  "y":98.9091
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":15,
                  "name":"",
@@ -237,7 +237,7 @@
                  "y":46.1818
                 }, 
                 {
-                 "gid":217,
+                 "gid":209,
                  "height":16,
                  "id":16,
                  "name":"",
@@ -390,16 +390,43 @@
  "tileheight":16,
  "tilesets":[
         {
+         "columns":24,
          "firstgid":1,
-         "source":"Split 1\/atlas_walls_high-16x32.tsx"
+         "image":"..\/0x72_DungeonTilesetII_v1.7\/atlas_walls_high-16x32.png",
+         "imageheight":128,
+         "imagewidth":384,
+         "margin":0,
+         "name":"atlas_walls_high-16x32",
+         "spacing":0,
+         "tilecount":192,
+         "tileheight":16,
+         "tilewidth":16
         }, 
         {
+         "columns":8,
          "firstgid":193,
-         "source":"player.tsx"
+         "image":"..\/images\/player.png",
+         "imageheight":32,
+         "imagewidth":128,
+         "margin":0,
+         "name":"player",
+         "spacing":0,
+         "tilecount":16,
+         "tileheight":16,
+         "tilewidth":16
         }, 
         {
+         "columns":1,
          "firstgid":209,
-         "source":"Split 1\/pumpkin_dude.tsx"
+         "image":"..\/0x72_DungeonTilesetII_v1.7\/frames\/pumpkin_dude_idle_anim_f1.png",
+         "imageheight":23,
+         "imagewidth":16,
+         "margin":0,
+         "name":"pumpkin_dude",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":23,
+         "tilewidth":16
         }],
  "tilewidth":16,
  "type":"map",

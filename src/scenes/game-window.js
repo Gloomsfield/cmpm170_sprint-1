@@ -7,6 +7,7 @@ class GameWindow extends Phaser.Scene {
 		this.currMap = data.mapKey || "map1";
 		this.currRoom = data.roomId || "r1";
 		this.returnSpawn = data.returnSpawn || "spawn_r1";
+		this.enemyId = data.enemyId || null;
 
 		this.fromMap = data.fromMap || false;
 		this.triggerName = data.triggerName || null;
@@ -51,7 +52,8 @@ class GameWindow extends Phaser.Scene {
 	}
 
 	attackEnemyOption(button) {
-
+		button.setStyle({ backgroundColor: '#FFF' });
+		console.log(`Enemy ${this.enemyId || "unknown"} attacked.`);
 	}
 
 	// test use case for function passed into makeTextbox
@@ -60,7 +62,7 @@ class GameWindow extends Phaser.Scene {
 
 		this.scene.start("dungeon-map_scene", {
 		mapKey: this.currMap,
-		spawnName: "spawn_start"
+		spawnName: this.returnSpawn
 		});
 		/*
 		this.currRoom = 'r2'
@@ -81,8 +83,6 @@ class GameWindow extends Phaser.Scene {
 		KEY_DOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 		KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
-		this.currMap = "map1"
-		this.currRoom = "r1"
 		this.textOptions = []
 
 		this.startConfig = {
@@ -118,17 +118,28 @@ class GameWindow extends Phaser.Scene {
 		this.cameras.main.setPosition(20.0, 20.0);
 
 		if (this.triggerType === "microtrans") {
-
 			this.makeTextbox(100, 150, "Buy Microtransaction", this.buyMicrotransaction.bind(this));
+			this.makeTextbox(100, 175, "Return to Map", this.returnToMap.bind(this));
+		}
+		else if (this.triggerType === "enemy") {
+			this.makeTextbox(100, 150, "Attack Enemy", this.attackEnemyOption.bind(this));
+			this.makeTextbox(100, 175, "Return to Map", this.returnToMap.bind(this));
 		}
 
-		this.roomText = this.add.text(25,25,`ROOM: ${this.currRoom}`)
+		const locationLabel = this.enemyId ? `ENEMY: ${this.enemyId}` : `ROOM: ${this.currRoom}`;
+		this.roomText = this.add.text(25,25, locationLabel)
 
 		// .bind(this) is CRUCIAL for nested function calls, otherwise context will be the button instead of game_window
 		// this.loadOptions(Room.maps.map1.rooms.r1)
 
 		this.startText = this.add.text(50, 50, "Dungeon game 3", this.startConfig)
-		this.makeTextbox(50, 100, "PLAY", this.startGame.bind(this))
+
+		if (!this.triggerType) {
+			this.makeTextbox(50, 100, "PLAY", this.startGame.bind(this))
+		}
+		else {
+			this.startText.visible = false;
+		}
 	}
 
 	buyMicrotransaction(button) {
@@ -159,4 +170,3 @@ class GameWindow extends Phaser.Scene {
 		});
 	}
 }
-

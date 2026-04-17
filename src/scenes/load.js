@@ -17,11 +17,16 @@ class Load extends Phaser.Scene {
 		this.load.image("tv_image", "tv.png");
 
 		this.load.spritesheet("player_spritesheet", "player.png", { frameWidth: 16, frameHeight: 16, });
-
 		this.load.image("dungeon_tiles", "FieldsTileset.png");
 
+		this.load.path = "./assets/0x72_DungeonTilesetII_v1.7/";
+		this.load.image("dungeon_walls_tiles", "atlas_walls_high-16x32.png");
+
+		this.load.path = "./assets/0x72_DungeonTilesetII_v1.7/frames/";
+		this.load.image("pumpkin_dude_idle", "pumpkin_dude_idle_anim_f1.png");
+
 		this.load.path = "./assets/maps/";
-		this.load.tilemapTiledJSON("map1", "MicroGameTestMap.json");
+		this.load.tilemapTiledJSON("map1", "Split 1 Map 1.tmj");
 
 		this.load.path = "./assets/fonts/"
 		this.load.bitmapFont(
@@ -31,4 +36,3 @@ class Load extends Phaser.Scene {
 		);
 	}
 }
-
