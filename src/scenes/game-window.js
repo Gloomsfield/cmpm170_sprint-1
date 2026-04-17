@@ -29,6 +29,10 @@ class GameWindow extends Phaser.Scene {
 		this.textOptions.push(button)
 	}
 
+	enterRoom(room) {
+
+	}
+
 	// load textbox options from room
 	loadOptions(room) {
 		let x = 100
@@ -64,6 +68,11 @@ class GameWindow extends Phaser.Scene {
 		*/
 	}
 
+	startGame(button) {
+		button.visible = false;
+		this.startText.visible = false;
+	}
+
 	create() {
 		KEY_UP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 		KEY_DOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -72,6 +81,17 @@ class GameWindow extends Phaser.Scene {
 		this.currMap = "map1"
 		this.currRoom = "r1"
 		this.textOptions = []
+
+		this.startConfig = {
+			fontFamily: 'Arial',
+			fontSize: '30px',
+			color: '#FFFFFF',
+			align: 'left',
+			padding: {
+				top: 5,
+				bottom: 5,
+			},
+		}
 
 		this.scoreConfig = {
 			fontFamily: 'Arial',
@@ -102,7 +122,10 @@ class GameWindow extends Phaser.Scene {
 		this.roomText = this.add.text(25,25,`ROOM: ${this.currRoom}`)
 
 		// .bind(this) is CRUCIAL for nested function calls, otherwise context will be the button instead of game_window
-		this.loadOptions(Room.maps.map1.rooms.r1)
+		// this.loadOptions(Room.maps.map1.rooms.r1)
+
+		this.startText = this.add.text(50, 50, "Dungeon game 3", this.startConfig)
+		this.makeTextbox(50, 100, "PLAY", this.startGame.bind(this))
 	}
 
 	buyMicrotransaction(button) {
