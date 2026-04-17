@@ -18,6 +18,11 @@ class Load extends Phaser.Scene {
 
 		this.load.spritesheet("player_spritesheet", "player.png", { frameWidth: 16, frameHeight: 16, });
 
+		this.load.image("dungeon_tiles", "FieldsTileset.png");
+
+		this.load.path = "./assets/maps/";
+		this.load.tilemapTiledJSON("map1", "MicroGameTestMap.json");
+
 		this.load.path = "./assets/fonts/"
 		this.load.bitmapFont(
 			"roboto_font",

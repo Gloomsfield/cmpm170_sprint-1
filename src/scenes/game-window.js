@@ -3,6 +3,16 @@ class GameWindow extends Phaser.Scene {
 		super("game-window_scene");
 	}
 
+	init(data) {
+		this.currMap = data.mapKey || "map1";
+		this.currRoom = data.roomId || "r1";
+		this.returnSpawn = data.returnSpawn || "spawn_r1";
+
+		this.fromMap = data.fromMap || false;
+		this.triggerName = data.triggerName || null;
+		this.triggerType = data.triggerType || null;
+	}
+
 	makeTextbox(x, y, text, func) {
 		let button = this.add.text(x, y, text, this.scoreConfig)
 			.setStyle({ backgroundColor: '#111' })
@@ -43,8 +53,15 @@ class GameWindow extends Phaser.Scene {
 	// test use case for function passed into makeTextbox
 	goToMap(button) {
 		button.setStyle({ backgroundColor: '#FFF' })
+
+		this.scene.start("dungeon-map_scene", {
+		mapKey: this.currMap,
+		spawnName: "spawn_start"
+		});
+		/*
 		this.currRoom = 'r2'
 		this.roomText.setText(`ROOM: ${this.currRoom}`)
+		*/
 	}
 
 	create() {
@@ -77,10 +94,29 @@ class GameWindow extends Phaser.Scene {
 		this.cameras.main.setSize(620.0, 560.0);
 		this.cameras.main.setPosition(20.0, 20.0);
 
+		if (this.triggerType === "microtrans") {
+
+			this.makeTextbox(100, 150, "Buy Microtransaction", this.buyMicrotransaction.bind(this));
+		}
+
 		this.roomText = this.add.text(25,25,`ROOM: ${this.currRoom}`)
 
 		// .bind(this) is CRUCIAL for nested function calls, otherwise context will be the button instead of game_window
 		this.loadOptions(Room.maps.map1.rooms.r1)
+	}
+
+	buyMicrotransaction(button) {
+		button.setStyle({ backgroundColor: '#FFF' });
+		console.log("Microtransaction purchase clicked.");
+	}
+
+	returnToMap(button) {
+		button.setStyle({ backgroundColor: '#FFF' });
+
+		this.scene.start("dungeon-map_scene", {
+			mapKey: this.currMap,
+			spawnName: this.returnSpawn
+		});
 	}
 }
 

@@ -14,9 +14,17 @@ let config = {
 	width: 1000,
 	height: 600,
 
-	scene: [ Load, Desktop, BankWindow, EmailWindow, GameWindow, ],
+	physics: {
+		default: 'arcade',
+		arcade: {
+			gravity: { y: 0 },
+			debug: false
+		}
+	},
+
+	scene: [ Load, Desktop, BankWindow, EmailWindow, GameWindow, DungeonMap],
 };
 
 let game = new Phaser.Game(config);
 
-let KEY_UP, KEY_DOWN, KEY_MENU;
+let KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_MENU;
