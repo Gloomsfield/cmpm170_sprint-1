@@ -29,6 +29,9 @@ class Load extends Phaser.Scene {
 		this.load.path = "./assets/maps/";
 		this.load.tilemapTiledJSON("map1", "Split1Map1.tmj");
 
+		this.load.path = "./src/gameobjects/";
+		this.load.json("emails_json", "emails.json");
+
 		this.load.path = "./assets/fonts/"
 		this.load.bitmapFont(
 			"roboto_font",

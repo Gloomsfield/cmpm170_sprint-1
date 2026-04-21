@@ -132,21 +132,14 @@ class Email extends Phaser.GameObjects.Container {
     }
 
     async loadEmail() {
-        /*
-        const email = await tryGenerateEmail();
-        const rankedEmail = await tryRankEmail(email);
-        const lines = email.split("\n").filter(l => l.trim() !== "");
-        */
-
-        const email = Email.emails[Math.floor(Math.random() * Email.emails.length)]
+        const emailData = this.scene.cache.json.get("emails_json");
+        const emails = emailData?.emails?.length ? emailData.emails : Email.emails;
+        const email = emails[Math.floor(Math.random() * emails.length)]
+        this.subject = "New Email"
         this.message = email.email
         this.category = email.ranking
 
         console.log(this.category)
-
-        //this.subject = lines[0] || email.email;
-        //this.message = lines.slice(1).join("\n") || "";
-        //this.category = rankedEmail === "important" ? "archive" : "trash";
 
         this.subject_text.setText(this.subject);
         this.message_text.setText(this.message);
