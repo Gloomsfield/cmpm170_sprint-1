@@ -78,10 +78,10 @@ class EmailWindow extends Phaser.Scene {
         const email = new Email(this);
         this.currentEmail = email;
 
-        email.on("email-loaded", () => {
+
             this.loadingText.setVisible(false);
             this.setButtonsEnabled(true);
-        });
+
 
         email.on("sort-correct",   () => { this.events.emit("sort-correct");   this.spawnEmail(); });
         email.on("sort-incorrect", () => { this.events.emit("sort-incorrect"); this.spawnEmail(); });
